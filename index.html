@@ -115,6 +115,13 @@ tr:last-child td{border-bottom:0}
 .steps{margin:0; padding-left:1.3rem; display:grid; gap:.55rem}
 .steps li{min-width:0}
 .steps li::marker{font-family:var(--f-mono); color:var(--muted)}
+.concept{background:var(--accent-soft); border-left:3px solid var(--accent); padding:.55rem .8rem; border-radius:0 6px 6px 0; font-size:.94rem}
+.concept b{color:var(--accent); font-family:var(--f-mono); font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; margin-right:.4rem}
+.st{font-weight:600}
+.steps li > * + *{margin-top:.3rem}
+.fx{display:flex; align-items:center; gap:.2rem .7rem; flex-wrap:wrap; border:1px dashed var(--accent); border-radius:6px; padding:.1rem .7rem; overflow-x:auto; max-width:100%}
+.fx span{font:500 .7rem var(--f-mono); letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+.fx mjx-container[display="true"]{margin:.25em 0 !important}
 .mx{overflow-x:auto; overflow-y:hidden; max-width:100%}
 .ans{background:var(--ans-soft); color:var(--ink); border-left:3px solid var(--ans); padding:.55rem .8rem; border-radius:0 6px 6px 0; font-weight:500}
 .ans b{color:var(--ans); font-family:var(--f-mono); font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; margin-right:.4rem}
@@ -157,9 +164,10 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
 <header class="top">
   <div class="eyebrow">Reviewer · Lectures 1.1, 1.2, 2.1</div>
   <h1>Mechanics Reviewer</h1>
-  <p class="lede">Every key term, formula, and slide problem from Translational Kinematics, Newton's Laws, and Work–Energy–Power, with full step-by-step solutions. Turn on Quiz mode to hide the solutions and test yourself first.</p>
+  <p class="lede">Every key term, formula, and slide problem from Translational Kinematics, Newton's Laws, and Work–Energy–Power, with full step-by-step solutions. Every solution names the concept it uses, then works step by step with the formula shown before the numbers go in. Turn on Quiz mode to hide the solutions and test yourself first.</p>
   <div class="legend">
     <span><i class="sw" style="background:var(--accent-soft);border-color:var(--accent)"></i>Must-memorize formula</span>
+    <span><i class="sw" style="border:1px dashed var(--accent)"></i>Formula used in that step</span>
     <span><i class="sw" style="background:var(--ans-soft);border-color:var(--ans)"></i>Final answer</span>
     <span><i class="sw" style="background:var(--warn-soft);border-color:var(--warn)"></i>Slide answer differs, see note</span>
   </div>
@@ -272,11 +280,13 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <p class="q">You jog around the Intramuros grounds starting from Lyceum. Total distance is 2.20 km. After 25.0 min you're back at Lyceum. Find your average speed and average velocity (m/s).</p>
         <div class="gf"><div><b>Given</b>\(d=2.20\ \text{km}=2200\ \text{m}\), \(\Delta t=25.0\ \text{min}=1500\ \text{s}\), start = end</div><div><b>Find</b>average speed, \(v_{av}\)</div></div>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Convert units: \(2.20\ \text{km}\times1000=2200\ \text{m}\), and \(25.0\ \text{min}\times60=1500\ \text{s}\).</li>
-          <li>Average speed uses total distance: <div class="mx">\[ \text{speed}_{av}=\frac{2200\ \text{m}}{1500\ \text{s}}=1.47\ \text{m/s} \]</div></li>
-          <li>Average velocity uses net displacement. You ended where you started, so \(\Delta x=0\): <div class="mx">\[ v_{av}=\frac{0}{1500\ \text{s}}=0 \]</div></li>
-        </ol><p class="ans"><b>Answer</b>Average speed = 1.47 m/s; average velocity = 0 m/s.</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Average <i>speed</i> uses the total distance traveled (a scalar). Average <i>velocity</i> uses displacement (a vector), which depends only on where you started and where you ended.</p>
+<ol class="steps">
+<li><p class="st">Convert to SI units</p><div class="fx"><span>Formula</span>\[ 1\ \text{km}=1000\ \text{m}\qquad 1\ \text{min}=60\ \text{s} \]</div><div class="mx">\[ d=2.20(1000)=2200\ \text{m}\qquad \Delta t=25.0(60)=1500\ \text{s} \]</div></li>
+<li><p class="st">Average speed (total distance ÷ time)</p><div class="fx"><span>Formula</span>\[ \text{speed}_{av}=\frac{d_{total}}{\Delta t} \]</div><div class="mx">\[ \text{speed}_{av}=\frac{2200\ \text{m}}{1500\ \text{s}}=1.47\ \text{m/s} \]</div></li>
+<li><p class="st">Average velocity (displacement ÷ time)</p><div class="fx"><span>Formula</span>\[ v_{av}=\frac{\Delta x}{\Delta t}=\frac{x_f-x_i}{\Delta t} \]</div><p>You ended back at Lyceum, so \(x_f=x_i\) and \(\Delta x=0\).</p><div class="mx">\[ v_{av}=\frac{0}{1500\ \text{s}}=0 \]</div></li>
+</ol><p class="ans"><b>Answer</b>Average speed = 1.47 m/s; average velocity = 0 m/s.</p></div>
       </article>
 
       <article class="prob">
@@ -284,10 +294,12 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <p class="q">In 8 seconds you go from 3 m/s to 6 m/s. What is your acceleration?</p>
         <div class="gf"><div><b>Given</b>\(v_1=3\ \text{m/s},\ v_2=6\ \text{m/s},\ t=8\ \text{s}\)</div><div><b>Find</b>\(a\)</div></div>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>No distance is involved, so use Eq. 3 (or Eq. 1).</li>
-          <li><div class="mx">\[ a=\frac{v_2-v_1}{t_2-t_1}=\frac{6-3}{8-0}=\frac{3}{8}=0.375\ \text{m/s}^2 \]</div></li>
-        </ol><p class="ans"><b>Answer</b>\(a = 0.375\ \text{m/s}^2\) (forward).</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Acceleration is the rate of change of velocity. You know the start and end velocities and the time, but no distance, so use the definition of acceleration (Eq. 3).</p>
+<ol class="steps">
+<li><p class="st">Apply the definition of acceleration</p><div class="fx"><span>Formula</span>\[ a=\frac{v_2-v_1}{t_2-t_1} \]</div><div class="mx">\[ a=\frac{6-3}{8-0}=\frac{3}{8}=0.375\ \text{m/s}^2 \]</div></li>
+<li><p class="st">Interpret the sign</p><p>\(a&gt;0\) and the velocity is positive, so you are speeding up in the forward direction.</p></li>
+</ol><p class="ans"><b>Answer</b>\(a = 0.375\ \text{m/s}^2\) (forward).</p></div>
       </article>
 
       <article class="prob">
@@ -295,11 +307,13 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <p class="q">You slide your book to a classmate 0.50 m away. The table slows it at −1.00 m/s². With what initial velocity should you push it so it stops right in front of your classmate?</p>
         <div class="gf"><div><b>Given</b>\(x_1=0,\ x_2=0.50\ \text{m},\ v_2=0\) (stops), \(a=-1.00\ \text{m/s}^2\)</div><div><b>Find</b>\(v_1\)</div></div>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Time is not given, so use the timeless Eq. 4: \(v_2^2=v_1^2+2a(x_2-x_1)\).</li>
-          <li><div class="mx">\[ 0=v_1^2+2(-1.00)(0.50-0)\ \Rightarrow\ v_1^2=1.00 \]</div></li>
-          <li>\(v_1=\sqrt{1.00}=1.00\ \text{m/s}\). Take the positive root because the book moves toward +x.</li>
-        </ol><p class="ans"><b>Answer</b>\(v_1 = 1.00\ \text{m/s}\)</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Constant acceleration (the table slows the book at a steady rate). "Stops right in front" means \(v_2=0\). Time isn't given or asked, so use the timeless equation (Eq. 4).</p>
+<ol class="steps">
+<li><p class="st">Write the timeless equation</p><div class="fx"><span>Formula</span>\[ v_2^2=v_1^2+2a(x_2-x_1) \]</div></li>
+<li><p class="st">Substitute \(v_2=0\), \(a=-1.00\), \(x_2-x_1=0.50\)</p><div class="mx">\[ 0=v_1^2+2(-1.00)(0.50)\ \Rightarrow\ v_1^2=1.00 \]</div></li>
+<li><p class="st">Take the square root and choose the sign</p><div class="mx">\[ v_1=\sqrt{1.00}=1.00\ \text{m/s} \]</div><p>Take the positive root because the book moves toward +x.</p></li>
+</ol><p class="ans"><b>Answer</b>\(v_1 = 1.00\ \text{m/s}\)</p></div>
       </article>
 
       <article class="prob">
@@ -307,12 +321,13 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <p class="q">A projector falls from rest from 2.5 m above the floor. What is its speed just before hitting the floor?</p>
         <div class="gf"><div><b>Given</b>\(y_1=2.5\ \text{m},\ y_2=0,\ v_1=0,\ a=-g=-9.81\ \text{m/s}^2\)</div><div><b>Find</b>\(v_2\) (speed)</div></div>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>No time is given, so use Eq. 4 with \(a=-g\): <div class="mx">\[ v_2^2=v_1^2+2a(y_2-y_1)=0+2(-9.81)(0-2.5)=49.05 \]</div></li>
-          <li>\(v_2=-\sqrt{49.05}=-7.00\ \text{m/s}\). It is negative because the projector moves downward.</li>
-          <li>Speed is the magnitude: 7.0 m/s. "Just before hitting" means the speed is <b>not</b> zero.</li>
-          <li>(Bonus) Fall time: \(t=\dfrac{v_2-v_1}{a}=\dfrac{-7.00}{-9.81}=0.714\ \text{s}\).</li>
-        </ol><p class="ans"><b>Answer</b>Speed = 7.0 m/s (downward).</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Free fall: the only acceleration is gravity, \(a=-g\) (up is +). "Falls from rest" means \(v_1=0\). No time is given, so use the timeless equation with y in place of x.</p>
+<ol class="steps">
+<li><p class="st">Write the timeless equation for vertical motion</p><div class="fx"><span>Formula</span>\[ v_2^2=v_1^2+2a(y_2-y_1),\quad a=-g \]</div><div class="mx">\[ v_2^2=0+2(-9.81)(0-2.5)=49.05 \]</div></li>
+<li><p class="st">Take the root and choose the sign</p><div class="mx">\[ v_2=-\sqrt{49.05}=-7.00\ \text{m/s} \]</div><p>Negative because it moves downward. Speed is the magnitude: 7.0 m/s. "Just before hitting" means the speed is <b>not</b> zero yet.</p></li>
+<li><p class="st">(Bonus) Fall time</p><div class="fx"><span>Formula</span>\[ v_2=v_1+at\ \Rightarrow\ t=\frac{v_2-v_1}{a} \]</div><div class="mx">\[ t=\frac{-7.00-0}{-9.81}=0.714\ \text{s} \]</div></li>
+</ol><p class="ans"><b>Answer</b>Speed = 7.0 m/s (downward).</p></div>
       </article>
 
       <article class="prob">
@@ -320,10 +335,13 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <p class="q">A car, initially at rest, travels 20 m in 4 s along a straight line with constant acceleration. Its acceleration is:</p>
         <ul class="choices"><li>A. 0.5</li><li>B. 1.3</li><li>C. 2.5</li><li>D. 4.9</li><li>E. 9.8 m/s²</li></ul>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Given \(v_1=0,\ \Delta x=20\ \text{m},\ t=4\ \text{s}\). There's no \(v_2\), so use Eq. 2.</li>
-          <li><div class="mx">\[ 20=0+0+\tfrac12a(4)^2=8a\ \Rightarrow\ a=\frac{20}{8}=2.5\ \text{m/s}^2 \]</div></li>
-        </ol><p class="ans"><b>Answer</b>C · 2.5 m/s²</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Constant acceleration from rest (\(v_1=0\)). You know the displacement and time, and the final velocity is not involved, so use the position–time equation (Eq. 2).</p>
+<ol class="steps">
+<li><p class="st">Write the position–time equation</p><div class="fx"><span>Formula</span>\[ x_2=x_1+v_1t+\tfrac12at^2 \]</div></li>
+<li><p class="st">Substitute \(x_2-x_1=20\), \(v_1=0\), \(t=4\)</p><div class="mx">\[ 20=0+0+\tfrac12a(4)^2=8a \]</div></li>
+<li><p class="st">Solve for a</p><div class="mx">\[ a=\frac{20}{8}=2.5\ \text{m/s}^2 \]</div></li>
+</ol><p class="ans"><b>Answer</b>C · 2.5 m/s²</p></div>
       </article>
 
       <article class="prob">
@@ -331,12 +349,14 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <p class="q">An object starts from rest at the origin with constant acceleration 4 m/s² along x. Its average velocity as it goes from x = 2 m to x = 8 m is:</p>
         <ul class="choices"><li>A. 1</li><li>B. 2</li><li>C. 3</li><li>D. 5</li><li>E. 6 m/s</li></ul>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Speed at x = 2 m (Eq. 4 from rest): \(v^2=0+2(4)(2)=16\Rightarrow v=4\ \text{m/s}\).</li>
-          <li>Speed at x = 8 m: \(v^2=2(4)(8)=64\Rightarrow v=8\ \text{m/s}\).</li>
-          <li>Time between them (Eq. 1): \(t=\dfrac{8-4}{4}=1\ \text{s}\).</li>
-          <li><div class="mx">\[ v_{av}=\frac{\Delta x}{\Delta t}=\frac{8-2}{1}=6\ \text{m/s} \]</div> Check: with constant \(a\), \(v_{av}=\frac{4+8}{2}=6\) ✓.</li>
-        </ol><p class="ans"><b>Answer</b>E · 6 m/s</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Average velocity = displacement ÷ time between the two points. The displacement is 6 m, but you need the time. Get the speed at each point with the timeless equation, then the time with Eq. 1.</p>
+<ol class="steps">
+<li><p class="st">Speed at x = 2 m (from rest at the origin)</p><div class="fx"><span>Formula</span>\[ v^2=v_1^2+2a\Delta x \]</div><div class="mx">\[ v^2=0+2(4)(2)=16\ \Rightarrow\ v=4\ \text{m/s} \]</div></li>
+<li><p class="st">Speed at x = 8 m</p><div class="mx">\[ v^2=0+2(4)(8)=64\ \Rightarrow\ v=8\ \text{m/s} \]</div></li>
+<li><p class="st">Time between the two points</p><div class="fx"><span>Formula</span>\[ v_2=v_1+at\ \Rightarrow\ t=\frac{v_2-v_1}{a} \]</div><div class="mx">\[ t=\frac{8-4}{4}=1\ \text{s} \]</div></li>
+<li><p class="st">Average velocity</p><div class="fx"><span>Formula</span>\[ v_{av}=\frac{\Delta x}{\Delta t} \]</div><div class="mx">\[ v_{av}=\frac{8-2}{1}=6\ \text{m/s} \]</div><p>Check: with constant a, \(v_{av}=\frac{v_1+v_2}{2}=\frac{4+8}{2}=6\) ✓</p></li>
+</ol><p class="ans"><b>Answer</b>E · 6 m/s</p></div>
       </article>
 
       <article class="prob">
@@ -344,10 +364,12 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <p class="q">The velocity of a projectile equals its initial velocity plus ______.</p>
         <ul class="choices"><li>A. constant horizontal velocity</li><li>B. constant vertical velocity</li><li>C. increasing horizontal velocity</li><li>D. increasing downward velocity</li><li>E. constant velocity toward the target</li></ul>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>\(\vec v=\vec v_1+\vec a t\), and for a projectile \(\vec a=-g\,\hat j\) (constant, straight down).</li>
-          <li>So the added term is \(-gt\,\hat j\): a downward velocity whose size grows with time. The horizontal part never changes.</li>
-        </ol><p class="ans"><b>Answer</b>D · an increasing downward velocity</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>A projectile's only acceleration is gravity: constant and straight down. Horizontal velocity never changes, while vertical velocity changes by \(g\) every second.</p>
+<ol class="steps">
+<li><p class="st">Write velocity under constant acceleration (vector form)</p><div class="fx"><span>Formula</span>\[ \vec v=\vec v_1+\vec a\,t,\qquad \vec a=-g\,\hat j \]</div><div class="mx">\[ \vec v=\vec v_1-gt\,\hat j \]</div></li>
+<li><p class="st">Read off the added term</p><p>\(-gt\,\hat j\) points down, and its size grows with t. Nothing is added horizontally.</p></li>
+</ol><p class="ans"><b>Answer</b>D · an increasing downward velocity</p></div>
       </article>
 
       <article class="prob">
@@ -356,12 +378,14 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <ul class="choices"><li>A. 4.0</li><li>B. 5.0</li><li>C. 6.0</li><li>D. 7.0</li><li>E. 8.0 s</li></ul>
         <div class="gf"><div><b>Given</b>\(y_1=0\) (cliff top), \(y_2=-59.4\ \text{m}\), \(v_{1y}=+19.5\ \text{m/s}\)</div><div><b>Find</b>\(t\)</div></div>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Only the vertical motion matters for time. Use \(y_2=y_1+v_{1y}t-\frac12gt^2\): <div class="mx">\[ -59.4=19.5t-4.905t^2 \]</div></li>
-          <li>Rearrange: \(4.905t^2-19.5t-59.4=0\).</li>
-          <li>Quadratic formula: <div class="mx">\[ t=\frac{19.5\pm\sqrt{19.5^2+4(4.905)(59.4)}}{2(4.905)}=\frac{19.5\pm\sqrt{1545.7}}{9.81}=\frac{19.5\pm39.3}{9.81} \]</div></li>
-          <li>Keep the positive root: \(t=58.8/9.81=6.0\ \text{s}\). The negative root has no physical meaning.</li>
-        </ol><p class="ans"><b>Answer</b>C · 6.0 s</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Projectile motion: time in the air is set by the vertical motion alone, which is free fall. Put the origin at the cliff top, so landing 59.4 m below means \(y_2=-59.4\ \text{m}\).</p>
+<ol class="steps">
+<li><p class="st">Write vertical position vs. time</p><div class="fx"><span>Formula</span>\[ y_2=y_1+v_{1y}t-\tfrac12gt^2 \]</div><div class="mx">\[ -59.4=0+19.5t-4.905t^2 \]</div></li>
+<li><p class="st">Rearrange into standard quadratic form</p><div class="mx">\[ 4.905t^2-19.5t-59.4=0 \]</div></li>
+<li><p class="st">Solve with the quadratic formula</p><div class="fx"><span>Formula</span>\[ t=\frac{-b\pm\sqrt{b^2-4ac}}{2a} \]</div><div class="mx">\[ t=\frac{19.5\pm\sqrt{19.5^2+4(4.905)(59.4)}}{2(4.905)}=\frac{19.5\pm39.3}{9.81} \]</div></li>
+<li><p class="st">Keep the physical (positive) root</p><div class="mx">\[ t=\frac{58.8}{9.81}=6.0\ \text{s} \]</div></li>
+</ol><p class="ans"><b>Answer</b>C · 6.0 s</p></div>
       </article>
 
       <article class="prob">
@@ -369,10 +393,12 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <p class="q">A cannon fires over level ground at 30° above horizontal with muzzle speed 980 m/s. Neglecting air resistance, the horizontal distance traveled is:</p>
         <ul class="choices"><li>A. 4.3 km</li><li>B. 8.5 km</li><li>C. 43 km</li><li>D. 85 km</li><li>E. 170 km</li></ul>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Launch and landing are at the same height, so the range formula applies.</li>
-          <li><div class="mx">\[ R=\frac{v_1^2\sin2\theta}{g}=\frac{(980)^2\sin60^\circ}{9.81}=\frac{960\,400(0.866)}{9.81}=8.48\times10^4\ \text{m} \]</div></li>
-        </ol><p class="ans"><b>Answer</b>D · ≈ 85 km</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Projectile over level ground, so the launch and landing heights are equal. That's exactly when the range formula applies.</p>
+<ol class="steps">
+<li><p class="st">Write the range formula</p><div class="fx"><span>Formula</span>\[ R=\frac{v_1^2\sin2\theta}{g} \]</div></li>
+<li><p class="st">Substitute \(v_1=980\ \text{m/s}\), \(\theta=30^\circ\)</p><div class="mx">\[ R=\frac{(980)^2\sin60^\circ}{9.81}=\frac{960\,400(0.866)}{9.81}=8.48\times10^4\ \text{m} \]</div></li>
+</ol><p class="ans"><b>Answer</b>D · ≈ 85 km</p></div>
       </article>
 
       <article class="prob">
@@ -380,23 +406,26 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <p class="q">A boy on a 20 m vertical cliff throws a stone horizontally at 20 m/s. How far from the foot of the cliff does it land?</p>
         <ul class="choices"><li>A. 10</li><li>B. 40</li><li>C. 50</li><li>D. 60</li><li>E. 80 m</li></ul>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Thrown horizontally means \(v_{1y}=0\) and \(v_x=20\ \text{m/s}\).</li>
-          <li>Vertical (find time): \(-20=0-\frac12(9.81)t^2\Rightarrow t=\sqrt{\frac{40}{9.81}}=2.02\ \text{s}\).</li>
-          <li>Horizontal (use time): \(x=v_xt=20(2.02)=40.4\ \text{m}\).</li>
-        </ol><p class="ans"><b>Answer</b>B · ≈ 40 m</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Horizontal launch: \(v_{1y}=0\), and \(v_x\) stays constant. The x and y motions are independent but share the same time, so find t from the fall, then use it horizontally.</p>
+<ol class="steps">
+<li><p class="st">Vertical motion: find the fall time</p><div class="fx"><span>Formula</span>\[ y_2=y_1+v_{1y}t-\tfrac12gt^2 \]</div><div class="mx">\[ -20=0+0-\tfrac12(9.81)t^2\ \Rightarrow\ t=\sqrt{\frac{40}{9.81}}=2.02\ \text{s} \]</div></li>
+<li><p class="st">Horizontal motion: use that time</p><div class="fx"><span>Formula</span>\[ x=v_xt \]</div><div class="mx">\[ x=20(2.02)=40.4\ \text{m} \]</div></li>
+</ol><p class="ans"><b>Answer</b>B · ≈ 40 m</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">K11</span><h4>Reading x–t graphs</h4><span class="src">slide 29</span></header>
         <p class="q">Graph A rises then falls. Graph B is a straight rising line. Graph C rises steeply then flattens. Graph D starts flat then curves sharply upward. Which object (a) moves with constant speed, (b) reverses direction, (c) starts slowly then speeds up?</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>The slope of an x–t graph is the velocity.</li>
-          <li>Constant slope (a straight line) means constant speed → <b>B</b>.</li>
-          <li>Slope changes sign (rises then falls) means velocity changes sign → <b>A</b>.</li>
-          <li>Slope starts small and grows → <b>D</b>. (C is the opposite: fast, then slows down.)</li>
-        </ol><p class="ans"><b>Answer</b>(a) B · (b) A · (c) D</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>The slope of an x–t graph is the velocity. A constant slope means constant velocity. A slope that changes sign means the object reverses direction. A slope that keeps increasing means the object is speeding up.</p>
+<ol class="steps">
+<li><p class="st">Velocity = slope</p><div class="fx"><span>Formula</span>\[ v=\frac{\Delta x}{\Delta t}=\text{slope of } x\text{–}t \]</div></li>
+<li><p class="st">(a) Constant speed</p><p>Straight line, constant slope → <b>B</b>.</p></li>
+<li><p class="st">(b) Reverses direction</p><p>Rises then falls: the slope goes from + to −, so the velocity changes sign → <b>A</b>.</p></li>
+<li><p class="st">(c) Starts slowly, then speeds up</p><p>Flat at first (small slope), then steeper (large slope) → <b>D</b>. C is the opposite: fast, then slowing down.</p></li>
+</ol><p class="ans"><b>Answer</b>(a) B · (b) A · (c) D</p></div>
       </article>
 
       <article class="prob">
@@ -404,14 +433,16 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <p class="q">At t = 0 a car has velocity 16 m/s. It slows down with acceleration \(a=-0.5t^2\) (m/s², t in s). The car stops at t = ?</p>
         <ul class="choices"><li>A. 4 s</li><li>B. 8 s</li><li>C. 16 s</li><li>D. 32 s</li><li>E. 64 s</li></ul>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>\(a\) changes with time, so Eqs. 1–4 are invalid. Integrate instead: \(v(t)=v_0+\int_0^t a\,dt\).</li>
-          <li><b>Intended version</b> (the standard textbook problem), \(a=-0.5t\): <div class="mx">\[ v(t)=16+\int_0^t(-0.5t)\,dt=16-0.25t^2 \]</div></li>
-          <li>Stops when \(v=0\): \(0.25t^2=16\Rightarrow t^2=64\Rightarrow t=8\ \text{s}\).</li>
-          <li>As printed (\(a=-0.5t^2\)): \(v=16-\frac{0.5}{3}t^3=0\Rightarrow t^3=96\Rightarrow t=4.58\ \text{s}\). That isn't one of the choices, which confirms the slide has a typo.</li>
-        </ol>
-        <p class="note warn"><b>Slide typo:</b> the choices only fit \(a=-0.5t\). If your exam shows \(t^2\), use the integration method above.</p>
-        <p class="ans"><b>Answer</b>B · 8 s</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>The acceleration changes with time, so the constant-acceleration equations (Eqs. 1–4) don't apply. Velocity is the integral of acceleration, and the car stops when \(v=0\).</p>
+<ol class="steps">
+<li><p class="st">Velocity from acceleration</p><div class="fx"><span>Formula</span>\[ v(t)=v_0+\int_0^t a\,dt \]</div></li>
+<li><p class="st">Intended version, \(a=-0.5t\) (the standard textbook problem)</p><div class="mx">\[ v(t)=16+\int_0^t(-0.5t)\,dt=16-0.25t^2 \]</div></li>
+<li><p class="st">Set \(v=0\) (the car stops)</p><div class="mx">\[ 0.25t^2=16\ \Rightarrow\ t^2=64\ \Rightarrow\ t=8\ \text{s} \]</div></li>
+<li><p class="st">As printed, \(a=-0.5t^2\)</p><div class="mx">\[ v=16-\tfrac{0.5}{3}t^3=0\ \Rightarrow\ t^3=96\ \Rightarrow\ t=4.58\ \text{s} \]</div><p>That isn't one of the choices, which confirms the slide has a typo.</p></li>
+</ol>
+<p class="note warn"><b>Slide typo:</b> the choices only fit \(a=-0.5t\). If your exam shows \(t^2\), use the same integration method.</p>
+<p class="ans"><b>Answer</b>B · 8 s</p></div>
       </article>
     </div>
   </div>
@@ -512,74 +543,87 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <header><span class="pid">N1</span><h4>Three wrestlers and a belt</h4><span class="src">slide 26</span></header>
         <p class="q">F₁ = 250 N points up-left at 53° above the −x axis, F₂ = 50 N points along +x, F₃ = 120 N points along −y. Find the magnitude and direction of the net force.</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Components (cos 53° = 0.602, sin 53° = 0.799):
-            <div class="tbl"><table><thead><tr><th>Force</th><th>x (N)</th><th>y (N)</th></tr></thead><tbody>
-              <tr><td>F₁</td><td>−250 cos53° = −150.5</td><td>+250 sin53° = +199.7</td></tr>
-              <tr><td>F₂</td><td>+50</td><td>0</td></tr>
-              <tr><td>F₃</td><td>0</td><td>−120</td></tr>
-              <tr><td><b>Sum</b></td><td><b>−100.5</b></td><td><b>+79.7</b></td></tr>
-            </tbody></table></div></li>
-          <li>Magnitude: <div class="mx">\[ F_{net}=\sqrt{(-100.5)^2+(79.7)^2}=\sqrt{16\,452}=128\ \text{N} \]</div></li>
-          <li>Direction: \(\tan^{-1}(79.7/100.5)=38.4^\circ\). \(F_x&lt;0\) and \(F_y&gt;0\), so the force is in <b>quadrant II</b>: 38.4° above −x, which is \(180^\circ-38.4^\circ=141.6^\circ\) from +x.</li>
-        </ol><p class="ans"><b>Answer</b>≈ 128 N at 141.6° from +x (38.4° above the −x axis).</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Net force is the vector sum of all forces. Forces at angles can't be added directly. Resolve each one into x and y components, add each axis separately, then rebuild the magnitude and direction.</p>
+<ol class="steps">
+<li><p class="st">Resolve each force into components</p><div class="fx"><span>Formula</span>\[ F_x=\pm F\cos\theta,\qquad F_y=\pm F\sin\theta \]</div><p>θ is measured from the x-axis. The sign comes from the direction (left or down is −). cos 53° = 0.602, sin 53° = 0.799.</p>
+<div class="tbl"><table><thead><tr><th>Force</th><th>x (N)</th><th>y (N)</th></tr></thead><tbody>
+<tr><td>F₁</td><td>−250 cos53° = −150.5</td><td>+250 sin53° = +199.7</td></tr>
+<tr><td>F₂</td><td>+50</td><td>0</td></tr>
+<tr><td>F₃</td><td>0</td><td>−120</td></tr>
+<tr><td><b>Sum</b></td><td><b>−100.5</b></td><td><b>+79.7</b></td></tr>
+</tbody></table></div></li>
+<li><p class="st">Add the components on each axis</p><div class="fx"><span>Formula</span>\[ \textstyle\sum F_x=F_{1x}+F_{2x}+F_{3x},\quad \sum F_y=F_{1y}+F_{2y}+F_{3y} \]</div><div class="mx">\[ \textstyle\sum F_x=-100.5\ \text{N},\qquad \sum F_y=+79.7\ \text{N} \]</div></li>
+<li><p class="st">Magnitude</p><div class="fx"><span>Formula</span>\[ F=\sqrt{F_x^2+F_y^2} \]</div><div class="mx">\[ F_{net}=\sqrt{(-100.5)^2+(79.7)^2}=\sqrt{16\,452}=128\ \text{N} \]</div></li>
+<li><p class="st">Direction (check the quadrant)</p><div class="fx"><span>Formula</span>\[ \theta=\tan^{-1}\left|\frac{F_y}{F_x}\right| \]</div><div class="mx">\[ \theta=\tan^{-1}\frac{79.7}{100.5}=38.4^\circ \]</div><p>\(F_x&lt;0\) and \(F_y&gt;0\) puts it in <b>quadrant II</b>: 38.4° above −x, which is \(180^\circ-38.4^\circ=141.6^\circ\) from +x.</p></li>
+</ol><p class="ans"><b>Answer</b>≈ 128 N at 141.6° from +x (38.4° above the −x axis).</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">N2</span><h4>Gymnast on a massless rope</h4><span class="src">slides 62–64</span></header>
         <p class="q">A 50.0 kg gymnast hangs from the lower end of a rope attached to the ceiling. What force does the rope exert on her? What is the tension at the top of the rope?</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>She is at rest, so she is in equilibrium: \(\sum F_y=0\). The forces on her are T (up) and mg (down).</li>
-          <li><div class="mx">\[ T-m_Gg=0\Rightarrow T=(50.0)(9.80)=490\ \text{N} \]</div></li>
-          <li>The rope is massless, so the tension is the same everywhere along it. At the top it is also 490 N.</li>
-        </ol><p class="ans"><b>Answer</b>490 N upward on her; 490 N at the top of the rope.</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>She hangs at rest, so she's in equilibrium (Newton's 1st law): the net force is zero. A massless rope has the same tension all along its length.</p>
+<ol class="steps">
+<li><p class="st">Draw the FBD and apply equilibrium</p><p>Forces on her: tension T (up) and weight mg (down).</p><div class="fx"><span>Formula</span>\[ \textstyle\sum F_y=0 \]</div><div class="mx">\[ T-m_Gg=0 \]</div></li>
+<li><p class="st">Solve for T</p><div class="fx"><span>Formula</span>\[ W=mg \]</div><div class="mx">\[ T=(50.0)(9.80)=490\ \text{N} \]</div></li>
+<li><p class="st">Tension at the top</p><p>The rope is massless, so the tension is the same everywhere: 490 N at the top too.</p></li>
+</ol><p class="ans"><b>Answer</b>490 N upward on her; 490 N at the top of the rope.</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">N3</span><h4>Jacket on a clothesline</h4><span class="src">slides 65–67</span></header>
         <p class="q">A 2.00 kg jacket hangs at the middle of a clothesline. Each side makes 22° with the horizontal. Find the tension in each side.</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>x-components: \(-T_1\cos22^\circ+T_2\cos22^\circ=0\Rightarrow T_1=T_2=T\). You can also see this from the symmetry.</li>
-          <li>y-components: both sides pull up by \(T\sin22^\circ\), and the weight pulls down: <div class="mx">\[ 2T\sin22^\circ-mg=0 \]</div></li>
-          <li><div class="mx">\[ T=\frac{mg}{2\sin22^\circ}=\frac{(2.00)(9.80)}{2(0.375)}=26.2\ \text{N} \]</div></li>
-        </ol><p class="ans"><b>Answer</b>T₁ = T₂ = 26.2 N. That's more than the jacket's 19.6 N weight because the angle is shallow.</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>The jacket hangs at rest, so the point where it hangs is in equilibrium. Each side of the line pulls along the rope at 22°, so resolve both tensions into components and set each axis to zero.</p>
+<ol class="steps">
+<li><p class="st">Horizontal balance</p><div class="fx"><span>Formula</span>\[ \textstyle\sum F_x=0 \]</div><div class="mx">\[ -T_1\cos22^\circ+T_2\cos22^\circ=0\ \Rightarrow\ T_1=T_2=T \]</div><p>You can also see this from the symmetry.</p></li>
+<li><p class="st">Vertical balance</p><div class="fx"><span>Formula</span>\[ \textstyle\sum F_y=0 \]</div><div class="mx">\[ T\sin22^\circ+T\sin22^\circ-mg=0\ \Rightarrow\ 2T\sin22^\circ=mg \]</div></li>
+<li><p class="st">Solve for T</p><div class="mx">\[ T=\frac{mg}{2\sin22^\circ}=\frac{(2.00)(9.80)}{2(0.375)}=26.2\ \text{N} \]</div></li>
+</ol><p class="ans"><b>Answer</b>T₁ = T₂ = 26.2 N. That's more than the jacket's 19.6 N weight because the angle is shallow.</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">N4</span><h4>Skier on a frictionless slope</h4><span class="src">slide 70</span></header>
         <p class="q">A 65 kg skier slides down a frictionless 32° slope. Find (a) the acceleration and (b) the force the snow exerts on the skier.</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Tilt the axes: x points down the slope, y is perpendicular to it. The forces are N (along +y) and mg (components below).</li>
-          <li>x: \(mg\sin32^\circ=ma\Rightarrow a=g\sin32^\circ=9.80(0.530)=5.19\ \text{m/s}^2\).</li>
-          <li>y: \(N-mg\cos32^\circ=0\Rightarrow N=65(9.80)(0.848)=540\ \text{N}\).</li>
-        </ol><p class="ans"><b>Answer</b>(a) 5.19 m/s² down the slope · (b) N = 540 N, perpendicular to the snow.</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Inclined plane with no friction. Tilt the axes so x runs along the slope. The skier accelerates along x (2nd law) and doesn't move perpendicular to the slope (equilibrium in y).</p>
+<ol class="steps">
+<li><p class="st">Resolve the weight on tilted axes</p><div class="fx"><span>Formula</span>\[ W_\parallel=mg\sin\theta,\qquad W_\perp=mg\cos\theta \]</div></li>
+<li><p class="st">(a) Along the slope: Newton's 2nd law</p><div class="fx"><span>Formula</span>\[ \textstyle\sum F_x=ma_x \]</div><div class="mx">\[ mg\sin32^\circ=ma\ \Rightarrow\ a=g\sin32^\circ=9.80(0.530)=5.19\ \text{m/s}^2 \]</div></li>
+<li><p class="st">(b) Perpendicular to the slope: equilibrium</p><div class="fx"><span>Formula</span>\[ \textstyle\sum F_y=0 \]</div><div class="mx">\[ N-mg\cos32^\circ=0\ \Rightarrow\ N=65(9.80)(0.848)=540\ \text{N} \]</div></li>
+</ol><p class="ans"><b>Answer</b>(a) 5.19 m/s² down the slope · (b) N = 540 N, perpendicular to the snow.</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">N5</span><h4>Brakes!</h4><span class="src">slide 71</span></header>
         <p class="q">Tire–road friction: μₖ = 0.61, μₛ = 0.89. A car moving at 24 m/s brakes. Find (a) the minimum stopping distance and (b) the stopping distance with the wheels locked (skidding).</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>On a level road, \(N=mg\). Friction is the only horizontal force: \(-\mu mg=ma\Rightarrow a=-\mu g\). The mass cancels.</li>
-          <li>Kinematics with \(v_2=0\): \(0=v_1^2-2\mu g\,d\Rightarrow d=\dfrac{v_1^2}{2\mu g}\).</li>
-          <li>(a) The shortest stop happens when the tires roll without skidding, which gives maximum <b>static</b> friction: <div class="mx">\[ d=\frac{24^2}{2(0.89)(9.80)}=\frac{576}{17.44}=33\ \text{m} \]</div></li>
-          <li>(b) Skidding means <b>kinetic</b> friction: <div class="mx">\[ d=\frac{576}{2(0.61)(9.80)}=48\ \text{m} \]</div></li>
-        </ol><p class="ans"><b>Answer</b>(a) ≈ 33 m · (b) ≈ 48 m. This is why anti-lock brakes help.</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Friction is the only horizontal force, so Newton's 2nd law gives the deceleration. Then kinematics (timeless equation) gives the distance. Rolling tires grip with <b>static</b> friction; skidding tires slide with <b>kinetic</b> friction.</p>
+<ol class="steps">
+<li><p class="st">Deceleration from Newton's 2nd law</p><div class="fx"><span>Formula</span>\[ \textstyle\sum F_x=ma,\qquad f=\mu N=\mu mg \]</div><div class="mx">\[ -\mu mg=ma\ \Rightarrow\ a=-\mu g \]</div><p>The mass cancels.</p></li>
+<li><p class="st">Stopping distance from the timeless equation</p><div class="fx"><span>Formula</span>\[ v_2^2=v_1^2+2a\,d,\quad v_2=0 \]</div><div class="mx">\[ 0=v_1^2-2\mu g\,d\ \Rightarrow\ d=\frac{v_1^2}{2\mu g} \]</div></li>
+<li><p class="st">(a) Rolling without skidding: use \(\mu_s\)</p><div class="mx">\[ d=\frac{24^2}{2(0.89)(9.80)}=\frac{576}{17.44}=33\ \text{m} \]</div></li>
+<li><p class="st">(b) Wheels locked: use \(\mu_k\)</p><div class="mx">\[ d=\frac{576}{2(0.61)(9.80)}=48\ \text{m} \]</div></li>
+</ol><p class="ans"><b>Answer</b>(a) ≈ 33 m · (b) ≈ 48 m. This is why anti-lock brakes help.</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">N6</span><h4>Jackie Chan on the ice cliff</h4><span class="src">slide 72</span></header>
         <p class="q">A 70 kg man dangles over a cliff edge, roped to a 940 kg rock 51 m from the edge on flat ice. How long until the rock goes over if (a) the ice is frictionless, (b) μₖ = 0.25?</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Two FBDs with the same \(a\) and \(T\). Rock: \(T=Ma\). Man: \(mg-T=ma\).</li>
-          <li>(a) Add the equations: <div class="mx">\[ a=\frac{mg}{M+m}=\frac{70(9.80)}{940+70}=\frac{686}{1010}=0.679\ \text{m/s}^2 \]</div></li>
-          <li>The rock starts from rest and must cover 51 m: \(51=\frac12(0.679)t^2\Rightarrow t=\sqrt{\frac{102}{0.679}}=12.3\ \text{s}\).</li>
-          <li>(b) Friction on the rock: \(f=\mu_kMg=0.25(940)(9.80)=2303\ \text{N}\). The man's weight is only 686 N, so the net force can't move the rock: \(a=\frac{686-2303}{1010}&lt;0\).</li>
-        </ol><p class="ans"><b>Answer</b>(a) ≈ 12 s · (b) the rock never slides, so he's safe.</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Two bodies joined by a taut rope: draw a separate FBD for each. They share the same acceleration and the same tension. Once you have a, kinematics gives the time. With friction, first check whether the hanging weight can even beat friction.</p>
+<ol class="steps">
+<li><p class="st">Newton's 2nd law for each body</p><div class="fx"><span>Formula</span>\[ \textstyle\sum F=ma \]</div><div class="mx">\[ \text{Rock: } T=Ma\qquad \text{Man: } mg-T=ma \]</div></li>
+<li><p class="st">(a) Add the equations to eliminate T</p><div class="mx">\[ a=\frac{mg}{M+m}=\frac{70(9.80)}{940+70}=\frac{686}{1010}=0.679\ \text{m/s}^2 \]</div></li>
+<li><p class="st">Time to cover 51 m from rest</p><div class="fx"><span>Formula</span>\[ x=v_1t+\tfrac12at^2,\quad v_1=0 \]</div><div class="mx">\[ 51=\tfrac12(0.679)t^2\ \Rightarrow\ t=\sqrt{\frac{102}{0.679}}=12.3\ \text{s} \]</div></li>
+<li><p class="st">(b) With friction: compare forces</p><div class="fx"><span>Formula</span>\[ f=\mu_kN=\mu_kMg \]</div><div class="mx">\[ f=0.25(940)(9.80)=2303\ \text{N} \]</div><p>The man's weight is only 686 N, which is less than the friction force, so the rock can't start moving: \(a=\frac{686-2303}{1010}&lt;0\).</p></li>
+</ol><p class="ans"><b>Answer</b>(a) ≈ 12 s · (b) the rock never slides, so he's safe.</p></div>
       </article>
 
       <article class="prob">
@@ -587,10 +631,12 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <p class="q">A 25 N crate is held at rest on a frictionless 25° incline by a force parallel to the incline. The normal force is:</p>
         <ul class="choices"><li>A. 4.1</li><li>B. 4.6</li><li>C. 8.9</li><li>D. 11</li><li>E. 23 N</li></ul>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>The applied force is parallel to the incline, so it has no perpendicular component. Perpendicular balance: \(N=W\cos\theta\).</li>
-          <li>\(N=25\cos25^\circ=25(0.906)=22.7\ \text{N}\).</li>
-        </ol><p class="ans"><b>Answer</b>E · ≈ 23 N</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>The crate is at rest, so it's in equilibrium in both directions. The applied force is parallel to the incline, so it has no perpendicular part. Only N and the perpendicular part of the weight act across the surface.</p>
+<ol class="steps">
+<li><p class="st">Balance forces perpendicular to the incline</p><div class="fx"><span>Formula</span>\[ \textstyle\sum F_\perp=0,\qquad W_\perp=W\cos\theta \]</div><div class="mx">\[ N-W\cos\theta=0\ \Rightarrow\ N=W\cos\theta \]</div></li>
+<li><p class="st">Substitute</p><div class="mx">\[ N=25\cos25^\circ=25(0.906)=22.7\ \text{N} \]</div></li>
+</ol><p class="ans"><b>Answer</b>E · ≈ 23 N</p></div>
       </article>
 
       <article class="prob">
@@ -598,10 +644,12 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <p class="q">A block slides down a frictionless 30° plane. Its acceleration is:</p>
         <ul class="choices"><li>A. 9.80</li><li>B. 8.49</li><li>C. 4.90</li><li>D. 5.66</li><li>E. 0 m/s²</li></ul>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Along the incline: \(mg\sin\theta=ma\Rightarrow a=g\sin\theta\).</li>
-          <li>\(a=9.80\sin30^\circ=9.80(0.5)=4.90\ \text{m/s}^2\).</li>
-        </ol><p class="ans"><b>Answer</b>C · 4.90 m/s²</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>On a frictionless incline, the only force along the slope is the parallel component of the weight. Newton's 2nd law along the slope gives the acceleration.</p>
+<ol class="steps">
+<li><p class="st">Newton's 2nd law along the incline</p><div class="fx"><span>Formula</span>\[ \textstyle\sum F_\parallel=ma,\qquad W_\parallel=mg\sin\theta \]</div><div class="mx">\[ mg\sin\theta=ma\ \Rightarrow\ a=g\sin\theta \]</div></li>
+<li><p class="st">Substitute</p><div class="mx">\[ a=9.80\sin30^\circ=9.80(0.5)=4.90\ \text{m/s}^2 \]</div></li>
+</ol><p class="ans"><b>Answer</b>C · 4.90 m/s²</p></div>
       </article>
 
       <article class="prob">
@@ -609,11 +657,13 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <p class="q">A 5 kg block hangs by a rope from the ceiling of an elevator accelerating downward at 3.0 m/s². The tension is:</p>
         <ul class="choices"><li>A. 15 N up</li><li>B. 34 N up</li><li>C. 34 N down</li><li>D. 64 N up</li><li>E. 64 N down</li></ul>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Take up as +, so \(a=-3.0\ \text{m/s}^2\). The forces are T (up) and mg (down).</li>
-          <li><div class="mx">\[ T-mg=ma\Rightarrow T=m(g+a)=5(9.80-3.0)=34\ \text{N} \]</div></li>
-          <li>A rope can only pull, so on the block the tension points up.</li>
-        </ol><p class="ans"><b>Answer</b>B · 34 N, up</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>The block moves with the elevator, so it has the elevator's acceleration. Use Newton's 2nd law vertically with up as +. Accelerating downward means a is negative.</p>
+<ol class="steps">
+<li><p class="st">Newton's 2nd law on the block</p><div class="fx"><span>Formula</span>\[ \textstyle\sum F_y=ma_y \]</div><div class="mx">\[ T-mg=ma \]</div></li>
+<li><p class="st">Solve with \(a=-3.0\ \text{m/s}^2\)</p><div class="fx"><span>Formula</span>\[ T=m(g+a) \]</div><div class="mx">\[ T=5(9.80-3.0)=34\ \text{N} \]</div></li>
+<li><p class="st">Direction</p><p>A rope can only pull, so the tension on the block points up.</p></li>
+</ol><p class="ans"><b>Answer</b>B · 34 N, up</p></div>
       </article>
 
       <article class="prob">
@@ -621,10 +671,12 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <p class="q">A 1100 kg elevator rises with speed increasing at 3.0 m/s². The cable tension is:</p>
         <ul class="choices"><li>A. 14000</li><li>B. 11000</li><li>C. 7500</li><li>D. 3300</li><li>E. 1100 N</li></ul>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>"Rising and speeding up" means \(a=+3.0\ \text{m/s}^2\).</li>
-          <li><div class="mx">\[ T=m(g+a)=1100(9.80+3.0)=14\,080\ \text{N} \]</div></li>
-        </ol><p class="ans"><b>Answer</b>A · ≈ 14 000 N</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Moving up and speeding up means the acceleration points up (+). Newton's 2nd law: the cable must supply the weight <i>plus</i> the extra force that accelerates the elevator.</p>
+<ol class="steps">
+<li><p class="st">Newton's 2nd law on the elevator</p><div class="fx"><span>Formula</span>\[ \textstyle\sum F_y=ma_y\ \Rightarrow\ T-mg=ma \]</div></li>
+<li><p class="st">Solve with \(a=+3.0\ \text{m/s}^2\)</p><div class="fx"><span>Formula</span>\[ T=m(g+a) \]</div><div class="mx">\[ T=1100(9.80+3.0)=14\,080\ \text{N} \]</div></li>
+</ol><p class="ans"><b>Answer</b>A · ≈ 14 000 N</p></div>
       </article>
 
       <article class="prob">
@@ -632,12 +684,14 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <p class="q">Blocks weighing 250 N and 350 N hang on either side of a massless pulley (an Atwood machine). The string tension is:</p>
         <ul class="choices"><li>A. 210</li><li>B. 290</li><li>C. 410</li><li>D. 500</li><li>E. 4900 N</li></ul>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Masses: \(m_1=250/9.80=25.5\ \text{kg}\), \(m_2=350/9.80=35.7\ \text{kg}\).</li>
-          <li>The heavy side goes down: \(a=\dfrac{(350-250)}{25.5+35.7}=\dfrac{100}{61.2}=1.63\ \text{m/s}^2\).</li>
-          <li>FBD of the light block (accelerating up): \(T-250=m_1a\Rightarrow T=250+25.5(1.63)=292\ \text{N}\).</li>
-          <li>Shortcut: \(T=\dfrac{2W_1W_2}{W_1+W_2}=\dfrac{2(250)(350)}{600}=292\ \text{N}\). It must fall between 250 and 350 N.</li>
-        </ol><p class="ans"><b>Answer</b>B · ≈ 290 N</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Atwood machine: both blocks hang from one string over a pulley, so they share the same tension and the same size of acceleration. The heavier block goes down. Apply Newton's 2nd law to each block.</p>
+<ol class="steps">
+<li><p class="st">Convert weights to masses</p><div class="fx"><span>Formula</span>\[ m=\frac{W}{g} \]</div><div class="mx">\[ m_1=\frac{250}{9.80}=25.5\ \text{kg},\qquad m_2=\frac{350}{9.80}=35.7\ \text{kg} \]</div></li>
+<li><p class="st">Acceleration of the system</p><div class="fx"><span>Formula</span>\[ a=\frac{(m_2-m_1)g}{m_1+m_2}=\frac{W_2-W_1}{m_1+m_2} \]</div><div class="mx">\[ a=\frac{350-250}{25.5+35.7}=\frac{100}{61.2}=1.63\ \text{m/s}^2 \]</div></li>
+<li><p class="st">Newton's 2nd law on the light block (accelerating up)</p><div class="fx"><span>Formula</span>\[ T-W_1=m_1a \]</div><div class="mx">\[ T=250+25.5(1.63)=292\ \text{N} \]</div></li>
+<li><p class="st">Shortcut check</p><div class="fx"><span>Formula</span>\[ T=\frac{2W_1W_2}{W_1+W_2} \]</div><div class="mx">\[ T=\frac{2(250)(350)}{600}=292\ \text{N} \]</div><p>It must fall between 250 N and 350 N, and it does.</p></li>
+</ol><p class="ans"><b>Answer</b>B · ≈ 290 N</p></div>
       </article>
     </div>
   </div>
@@ -735,67 +789,77 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <header><span class="pid">E1</span><h4>Pulling a box at an angle</h4><span class="src">slides 39–40</span></header>
         <p class="q">A 1.00 kg box is pulled across a frictionless table by a 0.250 N force at 25° above horizontal. It moves 3.00 m. How much work does the force do?</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>The displacement is horizontal, so the angle between F and d is 25°.</li>
-          <li><div class="mx">\[ W=Fd\cos\theta=(0.250)(3.00)\cos25^\circ=0.680\ \text{J} \]</div></li>
-        </ol><p class="ans"><b>Answer</b>0.680 J</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Work by a constant force is the part of the force along the displacement times the distance. Here the force is tilted 25° from the horizontal motion.</p>
+<ol class="steps">
+<li><p class="st">Identify the angle between F and d</p><p>The box moves horizontally and the force is 25° above horizontal, so θ = 25°.</p></li>
+<li><p class="st">Apply the work formula</p><div class="fx"><span>Formula</span>\[ W=Fd\cos\theta \]</div><div class="mx">\[ W=(0.250)(3.00)\cos25^\circ=0.680\ \text{J} \]</div></li>
+</ol><p class="ans"><b>Answer</b>0.680 J</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">E2</span><h4>Horse pulling a carriage</h4><span class="src">slides 41–42</span></header>
         <p class="q">A horse pulls a carriage with a constant 99.3 N force to the right for 50.0 m. How much work does the horse do?</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>The force is parallel to the displacement, so θ = 0°.</li>
-          <li>\(W=(99.3)(50.0)\cos0^\circ=4965\ \text{J}\).</li>
-        </ol><p class="ans"><b>Answer</b>4965 J ≈ 4.97 kJ</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Work by a constant force. The pull is in the same direction as the motion, so all of the force does work (θ = 0°, cos 0° = 1).</p>
+<ol class="steps">
+<li><p class="st">Apply the work formula</p><div class="fx"><span>Formula</span>\[ W=Fd\cos\theta \]</div><div class="mx">\[ W=(99.3)(50.0)\cos0^\circ=4965\ \text{J} \]</div></li>
+</ol><p class="ans"><b>Answer</b>4965 J ≈ 4.97 kJ</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">E3</span><h4>Work done by a block's weight</h4><span class="src">slides 43–44</span></header>
         <p class="q">A 0.100 kg block rides on top of a 0.250 kg block moving at 0.750 m/s along a frictionless track. How much work does m₂ do on m₁ in 1.00 s?</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>m₂ pushes on m₁ with its weight, straight down. The displacement is horizontal.</li>
-          <li>The angle is 90°, so \(W=Fd\cos90^\circ=0\).</li>
-        </ol><p class="ans"><b>Answer</b>0 J</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>A force perpendicular to the displacement does zero work, because cos 90° = 0.</p>
+<ol class="steps">
+<li><p class="st">Identify the force and its direction</p><p>m₂ pushes on m₁ with its weight, straight down. The displacement is horizontal, so θ = 90°.</p></li>
+<li><p class="st">Apply the work formula</p><div class="fx"><span>Formula</span>\[ W=Fd\cos\theta \]</div><div class="mx">\[ W=Fd\cos90^\circ=0 \]</div></li>
+</ol><p class="ans"><b>Answer</b>0 J</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">E4</span><h4>Work done by friction</h4><span class="src">slides 45–49</span></header>
         <p class="q">Same blocks (glued, total 0.350 kg) moving at 0.750 m/s, but now the track has μ = 0.200. How much work does friction do after 1.00 s?</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Net force: \(-\mu(m_1+m_2)g=(m_1+m_2)a\Rightarrow a=-\mu g=-0.200(9.81)=-1.962\ \text{m/s}^2\).</li>
-          <li><b>Check when it stops:</b> \(t_{stop}=\dfrac{0.750}{1.962}=0.382\ \text{s}\). That's less than 1.00 s, so it is at rest by t = 1.00 s.</li>
-          <li>So the distance is the full stopping distance: <div class="mx">\[ d=\frac{v_1^2}{2\mu g}=\frac{0.750^2}{2(1.962)}=0.143\ \text{m} \]</div></li>
-          <li><div class="mx">\[ W_f=-\mu(m_1+m_2)gd=-(0.200)(0.350)(9.81)(0.143)=-0.0984\ \text{J} \]</div></li>
-          <li>Check with the work–energy theorem: \(W=K_2-K_1=0-\frac12(0.350)(0.750)^2=-0.0984\ \text{J}\) ✓</li>
-        </ol>
-        <p class="note warn"><b>Slide answer differs:</b> the slide plugs t = 1.00 s into \(d=v_1t-\frac12\mu gt^2\) and gets d = −0.231 m, which would mean the block slid backwards. That gives +0.159 J. Friction can't speed up or reverse an object, so always check whether it stopped first.</p>
-        <p class="ans"><b>Answer</b>\(W_f = -0.0984\ \text{J}\)</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Friction does negative work, \(-fd\), but only while the block is sliding. So first check whether the block stops before 1.00 s. Newton's 2nd law gives the deceleration, kinematics gives the stopping time and distance, and the work–energy theorem checks the result.</p>
+<ol class="steps">
+<li><p class="st">Deceleration from Newton's 2nd law</p><div class="fx"><span>Formula</span>\[ \textstyle\sum F=ma,\qquad f=\mu N=\mu(m_1+m_2)g \]</div><div class="mx">\[ -\mu(m_1+m_2)g=(m_1+m_2)a\ \Rightarrow\ a=-\mu g=-1.962\ \text{m/s}^2 \]</div></li>
+<li><p class="st">Check when it stops</p><div class="fx"><span>Formula</span>\[ v_2=v_1+at,\quad v_2=0 \]</div><div class="mx">\[ t_{stop}=\frac{0.750}{1.962}=0.382\ \text{s}\ &lt;\ 1.00\ \text{s} \]</div><p>It's already at rest at t = 1.00 s.</p></li>
+<li><p class="st">Stopping distance</p><div class="fx"><span>Formula</span>\[ v_2^2=v_1^2+2ad\ \Rightarrow\ d=\frac{v_1^2}{2\mu g} \]</div><div class="mx">\[ d=\frac{0.750^2}{2(1.962)}=0.143\ \text{m} \]</div></li>
+<li><p class="st">Work done by friction</p><div class="fx"><span>Formula</span>\[ W_f=-fd=-\mu(m_1+m_2)g\,d \]</div><div class="mx">\[ W_f=-(0.200)(0.350)(9.81)(0.143)=-0.0984\ \text{J} \]</div></li>
+<li><p class="st">Check with the work–energy theorem</p><div class="fx"><span>Formula</span>\[ W_{tot}=K_2-K_1 \]</div><div class="mx">\[ W=0-\tfrac12(0.350)(0.750)^2=-0.0984\ \text{J}\ ✓ \]</div></li>
+</ol>
+<p class="note warn"><b>Slide answer differs:</b> the slide plugs t = 1.00 s into \(d=v_1t-\frac12\mu gt^2\) and gets d = −0.231 m, which would mean the block slid backwards. That gives +0.159 J. Friction can't speed up or reverse an object, so always check whether it stopped first.</p>
+<p class="ans"><b>Answer</b>\(W_f = -0.0984\ \text{J}\)</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">E5</span><h4>Constant velocity</h4><span class="src">slides 50–51</span></header>
         <p class="q">The glued blocks move at constant velocity 0.750 m/s on a frictionless track. What is the total work done after 1 s?</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Constant velocity means \(a=0\), so \(F_{net}=(m_1+m_2)(0)=0\).</li>
-          <li>\(W_{tot}=F_{net}d\cos\theta=0\). Also \(\Delta K=0\) because the speed doesn't change.</li>
-        </ol><p class="ans"><b>Answer</b>0 J</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Constant velocity means zero acceleration, so the net force is zero (Newton's 1st law). Zero net force does zero total work. Equivalently, the kinetic energy doesn't change.</p>
+<ol class="steps">
+<li><p class="st">Net force</p><div class="fx"><span>Formula</span>\[ F_{net}=ma \]</div><div class="mx">\[ F_{net}=(m_1+m_2)(0)=0 \]</div></li>
+<li><p class="st">Total work</p><div class="fx"><span>Formula</span>\[ W_{tot}=F_{net}\,d\cos\theta=K_2-K_1 \]</div><div class="mx">\[ W_{tot}=0\qquad(\Delta K=0\text{ since the speed is constant}) \]</div></li>
+</ol><p class="ans"><b>Answer</b>0 J</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">E6</span><h4>Box down a frictionless incline</h4><span class="src">slides 61–62</span></header>
         <p class="q">A 10.0 kg box slides from rest down a 5.00 m frictionless incline at 27°. What is its kinetic energy at the bottom?</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Two forces act: N (does no work, ⊥ to the motion) and W = mg (vertical).</li>
-          <li>Angle between the weight (straight down) and the displacement (down the slope): \(90^\circ-27^\circ=63^\circ\).</li>
-          <li><div class="mx">\[ W_g=mgd\cos63^\circ=(10.0)(9.81)(5.00)(0.454)=223\ \text{J} \]</div></li>
-          <li>Work–energy theorem: \(K_2=K_1+W_{tot}=0+223\).</li>
-        </ol><p class="ans"><b>Answer</b>K₂ ≈ 223 J (the slides round to 222 J)</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Work–energy theorem: total work equals the change in kinetic energy. Only gravity does work. The normal force is perpendicular to the motion, so its work is zero.</p>
+<ol class="steps">
+<li><p class="st">Find the angle between the weight and the displacement</p><p>Weight points straight down. The displacement is along a 27° slope, so the angle between them is \(90^\circ-27^\circ=63^\circ\).</p></li>
+<li><p class="st">Work done by gravity</p><div class="fx"><span>Formula</span>\[ W=Fd\cos\theta \]</div><div class="mx">\[ W_g=mgd\cos63^\circ=(10.0)(9.81)(5.00)(0.454)=223\ \text{J} \]</div></li>
+<li><p class="st">Apply the work–energy theorem</p><div class="fx"><span>Formula</span>\[ W_{tot}=K_2-K_1 \]</div><div class="mx">\[ K_2=K_1+W_{tot}=0+223=223\ \text{J} \]</div></li>
+</ol><p class="ans"><b>Answer</b>K₂ ≈ 223 J (the slides round to 222 J)</p></div>
       </article>
 
       <article class="prob">
@@ -824,33 +888,39 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
           </figure>
         </div>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>The force varies, so work = area under the F–y graph.</li>
-          <li>Rectangle (0 → 4 m): \(5.00\times4.00=20.0\ \text{J}\).</li>
-          <li>Triangle (4 → 6 m): \(\frac12(2.00)(5.00)=5.00\ \text{J}\).</li>
-          <li>Total: \(20.0+5.00=25.0\ \text{J}\).</li>
-        </ol><p class="ans"><b>Answer</b>25.0 J</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>When the force changes with position, you can't use \(W=Fd\). Work is the integral of F over the displacement, which is the area under the F–y graph.</p>
+<ol class="steps">
+<li><p class="st">Work as area under the graph</p><div class="fx"><span>Formula</span>\[ W=\int_{y_1}^{y_2}F\,dy=\text{area under } F\text{–}y \]</div></li>
+<li><p class="st">Rectangle, 0 → 4 m</p><div class="fx"><span>Formula</span>\[ A=bh \]</div><div class="mx">\[ A_1=(4.00)(5.00)=20.0\ \text{J} \]</div></li>
+<li><p class="st">Triangle, 4 → 6 m</p><div class="fx"><span>Formula</span>\[ A=\tfrac12bh \]</div><div class="mx">\[ A_2=\tfrac12(2.00)(5.00)=5.00\ \text{J} \]</div></li>
+<li><p class="st">Add the areas</p><div class="mx">\[ W=20.0+5.00=25.0\ \text{J} \]</div></li>
+</ol><p class="ans"><b>Answer</b>25.0 J</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">E8</span><h4>Bathroom scale spring</h4><span class="src">slides 74–77</span></header>
         <p class="q">A 585 N woman stands on a scale, compressing its spring 0.010 m at equilibrium. Find (a) the spring constant and (b) the work done by her weight.</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>(a) Equilibrium: \(\sum F_y=kx-mg=0\Rightarrow k=\dfrac{mg}{x}=\dfrac{585}{0.010}=5.85\times10^4\ \text{N/m}\).</li>
-          <li>(b) The weight and the compression both point down, so θ = 0°: <div class="mx">\[ W=mgx\cos0^\circ=(585)(0.010)=5.85\ \text{J} \]</div></li>
-        </ol><p class="ans"><b>Answer</b>(a) k = 58 500 N/m · (b) W = 5.85 J</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>(a) At equilibrium the spring force (Hooke's law) balances her weight. (b) Her weight is a constant force pointing the same way as the compression, so \(W=Fd\cos0^\circ\).</p>
+<ol class="steps">
+<li><p class="st">(a) Equilibrium on the scale</p><div class="fx"><span>Formula</span>\[ \textstyle\sum F_y=0,\qquad F_{spring}=kx \]</div><div class="mx">\[ kx-mg=0\ \Rightarrow\ k=\frac{mg}{x}=\frac{585}{0.010}=5.85\times10^4\ \text{N/m} \]</div></li>
+<li><p class="st">(b) Work done by her weight</p><div class="fx"><span>Formula</span>\[ W=Fd\cos\theta,\quad \theta=0^\circ \]</div><div class="mx">\[ W=(585)(0.010)\cos0^\circ=5.85\ \text{J} \]</div></li>
+</ol><p class="ans"><b>Answer</b>(a) k = 58 500 N/m · (b) W = 5.85 J</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">E9</span><h4>Compressing a spring</h4><span class="src">slide 78</span></header>
         <p class="q">A spring (k = 450 N/m) is compressed from its natural length of 0.120 m to 0.090 m. How much work must you do? (The slide only gives the setup; this is the standard question.)</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Compression: \(x=0.120-0.090=0.030\ \text{m}\), starting from the natural length (\(x_1=0\)).</li>
-          <li><div class="mx">\[ W_{you}=\tfrac12kx^2=\tfrac12(450)(0.030)^2=0.203\ \text{J} \]</div></li>
-          <li>The spring itself does \(-0.203\ \text{J}\) because it pushes against the compression.</li>
-        </ol><p class="ans"><b>Answer</b>≈ 0.20 J by you (−0.20 J by the spring)</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Spring force changes with x (Hooke's law), so the work to compress it from its natural length is the area under F = kx, which is \(\frac12kx^2\). That work is stored as elastic PE.</p>
+<ol class="steps">
+<li><p class="st">Find the compression</p><div class="fx"><span>Formula</span>\[ x=L_0-L \]</div><div class="mx">\[ x=0.120-0.090=0.030\ \text{m} \]</div></li>
+<li><p class="st">Work you do</p><div class="fx"><span>Formula</span>\[ W_{you}=\tfrac12kx^2 \]</div><div class="mx">\[ W_{you}=\tfrac12(450)(0.030)^2=0.203\ \text{J} \]</div></li>
+<li><p class="st">Work done by the spring</p><div class="fx"><span>Formula</span>\[ W_{spring}=-\left(\tfrac12kx_2^2-\tfrac12kx_1^2\right) \]</div><div class="mx">\[ W_{spring}=-(0.203-0)=-0.203\ \text{J} \]</div><p>Negative because the spring pushes against the compression.</p></li>
+</ol><p class="ans"><b>Answer</b>≈ 0.20 J by you (−0.20 J by the spring)</p></div>
       </article>
     </div>
   </div>
@@ -862,20 +932,24 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <header><span class="pid">E10</span><h4>Gym rat</h4><span class="src">slide 83</span></header>
         <p class="q">Bob lifts a 10 kg barbell 0.50 m in 1.0 s. Dan does the same lift in 5.0 s. Who does more work? Who uses more power?</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Work against gravity: \(W=mgh=(10)(9.81)(0.50)=49.1\ \text{J}\). It's the same for both lifts.</li>
-          <li>Bob: \(P=49.1/1.0=49.1\ \text{W}\). Dan: \(P=49.1/5.0=9.81\ \text{W}\).</li>
-        </ol><p class="ans"><b>Answer</b>Same work (49.1 J). Bob uses 5× more power.</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Work against gravity depends only on mass and height, not on how fast you lift. Power is how fast the work is done, so the quicker lift uses more power.</p>
+<ol class="steps">
+<li><p class="st">Work against gravity (same for both)</p><div class="fx"><span>Formula</span>\[ W=mgh \]</div><div class="mx">\[ W=(10)(9.81)(0.50)=49.1\ \text{J} \]</div></li>
+<li><p class="st">Power for each lift</p><div class="fx"><span>Formula</span>\[ P=\frac{W}{\Delta t} \]</div><div class="mx">\[ P_{Bob}=\frac{49.1}{1.0}=49.1\ \text{W}\qquad P_{Dan}=\frac{49.1}{5.0}=9.81\ \text{W} \]</div></li>
+</ol><p class="ans"><b>Answer</b>Same work (49.1 J). Bob uses 5× more power.</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">E11</span><h4>The electric bill</h4><span class="src">slide 84</span></header>
         <p class="q">Your family uses 1,500 kWh this month. Convert that to horsepower-hours. At PhP 1.50 per kWh, what is the bill?</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>1 hp = 0.746 kW, so <div class="mx">\[ 1500\ \text{kWh}\times\frac{1\ \text{hp}}{0.746\ \text{kW}}=2.01\times10^3\ \text{hp·h} \]</div></li>
-          <li>Bill: \(1500\times\text{PhP }1.50=\text{PhP }2{,}250\).</li>
-        </ol><p class="ans"><b>Answer</b>≈ 2,011 hp·h · bill = PhP 2,250</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>A kilowatt-hour is a unit of <i>energy</i> (power × time). To change units, convert only the power part using 1 hp = 0.746 kW. The bill is energy used × price per unit.</p>
+<ol class="steps">
+<li><p class="st">Convert kWh to hp·h</p><div class="fx"><span>Formula</span>\[ 1\ \text{hp}=746\ \text{W}=0.746\ \text{kW} \]</div><div class="mx">\[ 1500\ \text{kWh}\times\frac{1\ \text{hp}}{0.746\ \text{kW}}=2.01\times10^3\ \text{hp·h} \]</div></li>
+<li><p class="st">Compute the bill</p><div class="fx"><span>Formula</span>\[ \text{Bill}=\text{energy}\times\text{rate} \]</div><div class="mx">\[ 1500\times\text{PhP }1.50=\text{PhP }2{,}250 \]</div></li>
+</ol><p class="ans"><b>Answer</b>≈ 2,011 hp·h · bill = PhP 2,250</p></div>
       </article>
     </div>
   </div>
@@ -888,11 +962,13 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <header><span class="pid">E12</span><h4>Hilly terrain</h4><span class="src">slides 105–108</span></header>
         <p class="q">A 2.00 kg box starts from rest at point A, 2.00 m above the ground, and slides along a frictionless hilly road to point B at ground level. Find (a) the work done by gravity and (b) the speed at B.</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Reference h = 0 at the ground. Position 1 (A): \(v_1=0,\ h_1=2.00\). Position 2 (B): \(h_2=0\).</li>
-          <li>(a) \(W=-(U_2-U_1)=-(0-mgh_1)=(2.00)(9.81)(2.00)=39.2\ \text{J}\). The shape of the path doesn't matter because gravity is conservative.</li>
-          <li>(b) \(mgh_1=\frac12mv_2^2\Rightarrow v_2=\sqrt{2gh_1}=\sqrt{2(9.81)(2.00)}=6.26\ \text{m/s}\).</li>
-        </ol><p class="ans"><b>Answer</b>(a) 39.2 J · (b) 6.26 m/s</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Gravity is a conservative force, so its work depends only on the change in height, not the shape of the road. With no friction, mechanical energy is conserved.</p>
+<ol class="steps">
+<li><p class="st">Set up the two positions</p><p>Reference h = 0 at the ground. Position 1 (A): \(v_1=0,\ h_1=2.00\ \text{m}\). Position 2 (B): \(h_2=0\).</p></li>
+<li><p class="st">(a) Work done by gravity</p><div class="fx"><span>Formula</span>\[ W_g=-\Delta U=-(U_2-U_1),\quad U=mgh \]</div><div class="mx">\[ W_g=-(0-mgh_1)=(2.00)(9.81)(2.00)=39.2\ \text{J} \]</div></li>
+<li><p class="st">(b) Speed at B from conservation of energy</p><div class="fx"><span>Formula</span>\[ K_1+U_1=K_2+U_2 \]</div><div class="mx">\[ 0+mgh_1=\tfrac12mv_2^2+0\ \Rightarrow\ v_2=\sqrt{2gh_1}=\sqrt{2(9.81)(2.00)}=6.26\ \text{m/s} \]</div></li>
+</ol><p class="ans"><b>Answer</b>(a) 39.2 J · (b) 6.26 m/s</p></div>
       </article>
 
       <article class="prob">
@@ -900,46 +976,59 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <p class="q">A pendulum bob is released from height h above its lowest point. Describe its K and U at the release point and the lowest point.</p>
         <button class="reveal" type="button">Show solution</button>
         <div class="sol">
-          <div class="tbl"><table><thead><tr><th></th><th>Release point (A)</th><th>Lowest point (B)</th></tr></thead><tbody>
-            <tr><td>U</td><td>Maximum: \(mgh\)</td><td>Minimum (0)</td></tr>
-            <tr><td>K</td><td>0 (at rest)</td><td>Maximum: \(\frac12mv^2=mgh\)</td></tr>
-            <tr><td>E</td><td>\(mgh\), all potential</td><td>\(mgh\), all kinetic</td></tr>
-          </tbody></table></div>
-          <p class="ans"><b>Answer</b>Speed at the bottom: \(v=\sqrt{2gh}\). Total energy stays \(mgh\) throughout.</p></div>
+<p class="concept"><b>Concept</b>Only gravity does work on the bob. The string's tension is always perpendicular to the motion, so it does no work. Mechanical energy is conserved: it trades back and forth between U and K.</p>
+<ol class="steps">
+<li><p class="st">Total energy stays constant</p><div class="fx"><span>Formula</span>\[ E=K+U=\text{constant} \]</div></li>
+<li><p class="st">At the release point (A)</p><div class="fx"><span>Formula</span>\[ K=\tfrac12mv^2,\qquad U=mgh \]</div><p>The bob is at rest, so K = 0 and U = mgh (maximum).</p></li>
+<li><p class="st">At the lowest point (B)</p><p>h = 0, so U = 0 and all the energy is kinetic: K = mgh (maximum).</p></li>
+<li><p class="st">Speed at the bottom</p><div class="mx">\[ \tfrac12mv^2=mgh\ \Rightarrow\ v=\sqrt{2gh} \]</div></li>
+</ol>
+<div class="tbl"><table><thead><tr><th></th><th>Release point (A)</th><th>Lowest point (B)</th></tr></thead><tbody>
+<tr><td>U</td><td>Maximum: \(mgh\)</td><td>Minimum (0)</td></tr>
+<tr><td>K</td><td>0 (at rest)</td><td>Maximum: \(\frac12mv^2=mgh\)</td></tr>
+<tr><td>E</td><td>\(mgh\), all potential</td><td>\(mgh\), all kinetic</td></tr>
+</tbody></table></div>
+<p class="ans"><b>Answer</b>Speed at the bottom: \(v=\sqrt{2gh}\). Total energy stays \(mgh\) throughout.</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">E14</span><h4>Spring launches a block up an incline</h4><span class="src">slides 111–113</span></header>
         <p class="q">A 2.00 kg block compresses a spring (k = 400 N/m) by 0.220 m. Released from rest, it slides along a frictionless floor, then up a frictionless 37.0° incline. Origin is at the spring's relaxed position. (a) Where is its potential energy minimum? (b) How far up the incline does it go?</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>(a) \(U=mgh+\frac12kx^2\). Both terms are zero once the spring is relaxed (x = 0) and the block is still on the floor (h = 0). So U is minimum (zero) from the origin up to the foot of the incline.</li>
-          <li>(b) Position 1: compressed, at rest, so \(E_1=\frac12kx_1^2\). Position 2: highest point, \(v=0\), off the spring, so \(E_2=mgh_2\).</li>
-          <li><div class="mx">\[ \tfrac12(400)(0.220)^2=9.68\ \text{J}=(2.00)(9.81)h_2\Rightarrow h_2=0.493\ \text{m} \]</div></li>
-          <li>Distance along the slope: \(d=\dfrac{h_2}{\sin37.0^\circ}=\dfrac{0.493}{0.602}=0.820\ \text{m}\).</li>
-        </ol>
-        <p class="note warn"><b>Slide answer differs:</b> the slide's last line says "v₂ = 6.26 m/s", which was copied from the hilly-terrain problem, and its figure labels the angle 30°. Using the stated 37°, d = 0.820 m. With 30° it would be 0.987 m.</p>
-        <p class="ans"><b>Answer</b>(a) At the origin (anywhere on the level floor after release) · (b) h = 0.493 m, so 0.820 m along the incline.</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>No friction anywhere, so mechanical energy is conserved. The spring's elastic PE turns into kinetic energy, then into gravitational PE as the block climbs. At the highest point the block is momentarily at rest.</p>
+<ol class="steps">
+<li><p class="st">(a) Where is U smallest?</p><div class="fx"><span>Formula</span>\[ U=mgh+\tfrac12kx^2 \]</div><p>Both terms are zero once the spring is relaxed (x = 0) and the block is still on the floor (h = 0). So U is minimum (zero) from the origin up to the foot of the incline.</p></li>
+<li><p class="st">(b) Conservation from release to the highest point</p><div class="fx"><span>Formula</span>\[ K_1+U_{G1}+U_{E1}=K_2+U_{G2}+U_{E2} \]</div><div class="mx">\[ 0+0+\tfrac12kx_1^2=0+mgh_2+0 \]</div></li>
+<li><p class="st">Solve for the height</p><div class="mx">\[ \tfrac12(400)(0.220)^2=9.68\ \text{J}=(2.00)(9.81)h_2\ \Rightarrow\ h_2=0.493\ \text{m} \]</div></li>
+<li><p class="st">Convert height to distance along the slope</p><div class="fx"><span>Formula</span>\[ \sin\theta=\frac{h}{d}\ \Rightarrow\ d=\frac{h}{\sin\theta} \]</div><div class="mx">\[ d=\frac{0.493}{\sin37.0^\circ}=\frac{0.493}{0.602}=0.820\ \text{m} \]</div></li>
+</ol>
+<p class="note warn"><b>Slide answer differs:</b> the slide's last line says "v₂ = 6.26 m/s", which was copied from the hilly-terrain problem, and its figure labels the angle 30°. Using the stated 37°, d = 0.820 m. With 30° it would be 0.987 m.</p>
+<p class="ans"><b>Answer</b>(a) At the origin (anywhere on the level floor after release) · (b) h = 0.493 m, so 0.820 m along the incline.</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">E15</span><h4>Baseball thrown up</h4><span class="src">slides 114–115</span></header>
         <p class="q">A 0.150 kg baseball is thrown straight up at 20.0 m/s from y = 0. How high does it go?</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>\(\frac12mv_1^2=mgh_2\), and the mass cancels: \(h_2=\dfrac{v_1^2}{2g}\).</li>
-          <li>\(h_2=\dfrac{(20.0)^2}{2(9.81)}=\dfrac{400}{19.62}=20.4\ \text{m}\).</li>
-        </ol><p class="ans"><b>Answer</b>20.4 m. The mass isn't needed.</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Only gravity acts, so mechanical energy is conserved. At the maximum height the ball is momentarily at rest, so all its kinetic energy has become gravitational PE.</p>
+<ol class="steps">
+<li><p class="st">Conservation of energy, launch → top</p><div class="fx"><span>Formula</span>\[ K_1+U_1=K_2+U_2 \]</div><div class="mx">\[ \tfrac12mv_1^2+0=0+mgh_2\ \Rightarrow\ h_2=\frac{v_1^2}{2g} \]</div><p>The mass cancels.</p></li>
+<li><p class="st">Substitute</p><div class="mx">\[ h_2=\frac{(20.0)^2}{2(9.81)}=\frac{400}{19.62}=20.4\ \text{m} \]</div></li>
+</ol><p class="ans"><b>Answer</b>20.4 m. The mass isn't needed.</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">E16</span><h4>Horizontal spring</h4><span class="src">slides 116–117</span></header>
         <p class="q">A spring (k = 1025 N/m) attached to a 0.250 kg box is compressed 3.00 cm and released. What is the box's speed just as it loses contact with the spring?</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Everything is horizontal, so \(U_G\) doesn't change. \(\frac12kx_1^2=\frac12mv_2^2\).</li>
-          <li><div class="mx">\[ v_2=x_1\sqrt{\frac{k}{m}}=0.0300\sqrt{\frac{1025}{0.250}}=0.0300(64.0)=1.92\ \text{m/s} \]</div></li>
-        </ol><p class="ans"><b>Answer</b>1.92 m/s</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Everything is horizontal, so the gravitational PE doesn't change. With no friction, the spring's elastic PE turns entirely into kinetic energy by the time the box leaves the spring (x = 0).</p>
+<ol class="steps">
+<li><p class="st">Conservation of energy</p><div class="fx"><span>Formula</span>\[ U_{E1}=K_2:\quad \tfrac12kx_1^2=\tfrac12mv_2^2 \]</div></li>
+<li><p class="st">Solve for v and substitute</p><div class="mx">\[ v_2=x_1\sqrt{\frac{k}{m}}=0.0300\sqrt{\frac{1025}{0.250}}=0.0300(64.0)=1.92\ \text{m/s} \]</div></li>
+</ol><p class="ans"><b>Answer</b>1.92 m/s</p></div>
       </article>
 
       <article class="prob">
@@ -947,54 +1036,64 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <p class="q">A vertical spring gun (natural length 10.0 cm, k = 1200 N/m) holds a 0.125 kg ball and is compressed to half its length. Ground is y = 0. Find (a) the total PE before firing, (b) the maximum speed, (c) the maximum height.</p>
         <div class="gf"><div><b>Position 1</b>\(x_1=0.050\ \text{m},\ y_1=0.050\ \text{m},\ v_1=0\)</div><div><b>Leaves spring</b>\(x=0,\ y_2=0.100\ \text{m}\)</div><div><b>Top</b>\(v_3=0,\ y_3=?\)</div></div>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>(a) <div class="mx">\[ U_1=mgy_1+\tfrac12kx_1^2=(0.125)(9.81)(0.050)+\tfrac12(1200)(0.050)^2=0.0613+1.500=1.561\ \text{J} \]</div></li>
-          <li>(b) The speed is greatest where the ball leaves the spring at y = 0.100 m. After that, gravity only slows it. <div class="mx">\[ 1.561=(0.125)(9.81)(0.100)+\tfrac12(0.125)v_2^2\Rightarrow \tfrac12(0.125)v_2^2=1.439 \]</div> \(v_2=\sqrt{\dfrac{2(1.439)}{0.125}}=\sqrt{23.0}=4.80\ \text{m/s}\).</li>
-          <li>(c) At the top, all the energy is gravitational: \(1.561=(0.125)(9.81)y_3\Rightarrow y_3=1.27\ \text{m}\).</li>
-        </ol>
-        <p class="note warn"><b>Slide answer differs:</b> the slide gives v = 5.64 m/s, but that would need \(K=\frac12(0.125)(5.64)^2=1.99\ \text{J}\), more than the 1.561 J stored. You can cross-check from the top: \(v=\sqrt{2g(1.273-0.100)}=4.80\ \text{m/s}\) ✓.</p>
-        <p class="ans"><b>Answer</b>(a) 1.561 J · (b) 4.80 m/s · (c) 1.27 m above the ground</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Conservation of energy with both elastic and gravitational PE. The ball speeds up while the spring pushes it. Once it leaves the spring, only gravity acts and slows it down. So the maximum speed is where it leaves the spring.</p>
+<ol class="steps">
+<li><p class="st">(a) Total PE before firing</p><div class="fx"><span>Formula</span>\[ U=mgy+\tfrac12kx^2 \]</div><div class="mx">\[ U_1=(0.125)(9.81)(0.050)+\tfrac12(1200)(0.050)^2=0.0613+1.500=1.561\ \text{J} \]</div></li>
+<li><p class="st">(b) Conservation, release → leaving the spring</p><div class="fx"><span>Formula</span>\[ K_1+U_{G1}+U_{E1}=K_2+U_{G2}+U_{E2} \]</div><div class="mx">\[ 1.561=\tfrac12(0.125)v_2^2+(0.125)(9.81)(0.100)+0\ \Rightarrow\ \tfrac12(0.125)v_2^2=1.439 \]</div><div class="mx">\[ v_2=\sqrt{\frac{2(1.439)}{0.125}}=\sqrt{23.0}=4.80\ \text{m/s} \]</div></li>
+<li><p class="st">(c) Conservation, release → highest point (\(v_3=0\))</p><div class="fx"><span>Formula</span>\[ E_1=mgy_3 \]</div><div class="mx">\[ 1.561=(0.125)(9.81)y_3\ \Rightarrow\ y_3=1.27\ \text{m} \]</div></li>
+</ol>
+<p class="note warn"><b>Slide answer differs:</b> the slide gives v = 5.64 m/s, but that would need \(K=\frac12(0.125)(5.64)^2=1.99\ \text{J}\), more than the 1.561 J stored. You can cross-check from the top: \(v=\sqrt{2g(1.273-0.100)}=4.80\ \text{m/s}\) ✓.</p>
+<p class="ans"><b>Answer</b>(a) 1.561 J · (b) 4.80 m/s · (c) 1.27 m above the ground</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">E18</span><h4>It's the climb</h4><span class="src">slides 122–123</span></header>
         <p class="q">What minimum speed does a 5.00 kg rock need to climb a 70.0 m high mountain? Ignore friction.</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>The minimum speed lets it <i>just</i> reach the top with \(v_2=0\).</li>
-          <li>\(\frac12mv_1^2=mgh_2\Rightarrow v_1=\sqrt{2gh_2}=\sqrt{2(9.81)(70.0)}=37.1\ \text{m/s}\).</li>
-        </ol><p class="ans"><b>Answer</b>≈ 37 m/s</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>No friction, so mechanical energy is conserved. The <i>minimum</i> speed is the one that gets the rock to the top with nothing left over, so \(v_2=0\) at the top.</p>
+<ol class="steps">
+<li><p class="st">Conservation of energy, bottom → top</p><div class="fx"><span>Formula</span>\[ K_1+U_1=K_2+U_2 \]</div><div class="mx">\[ \tfrac12mv_1^2+0=0+mgh_2\ \Rightarrow\ v_1=\sqrt{2gh_2} \]</div></li>
+<li><p class="st">Substitute</p><div class="mx">\[ v_1=\sqrt{2(9.81)(70.0)}=37.1\ \text{m/s} \]</div></li>
+</ol><p class="ans"><b>Answer</b>≈ 37 m/s</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">E19</span><h4>Rampa: two ramps</h4><span class="src">slides 124–125</span></header>
         <p class="q">Two identical blocks start from rest at the same height y₁ on two different frictionless ramps (one curved with a dip, one a straight slope). Both end at the same height y₂. Which is faster at the right end?</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>For each block: \(mgy_1=mgy_2+\frac12mv_2^2\Rightarrow v_2=\sqrt{2g(y_1-y_2)}\).</li>
-          <li>Only the heights matter, because gravity is conservative and path-independent.</li>
-        </ol><p class="ans"><b>Answer</b>Same speed. (Block I gets there sooner, but not faster.)</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Gravity is conservative, so the speed at the end depends only on the drop in height, not on the shape of the path. Both ramps are frictionless.</p>
+<ol class="steps">
+<li><p class="st">Conservation of energy for either block</p><div class="fx"><span>Formula</span>\[ K_1+U_1=K_2+U_2 \]</div><div class="mx">\[ 0+mgy_1=\tfrac12mv_2^2+mgy_2\ \Rightarrow\ v_2=\sqrt{2g(y_1-y_2)} \]</div></li>
+<li><p class="st">Compare</p><p>Both blocks have the same \(y_1\) and \(y_2\), so both have the same \(v_2\).</p></li>
+</ol><p class="ans"><b>Answer</b>Same speed. (Block I gets there sooner, but not faster.)</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">E20</span><h4>Wrecking ball</h4><span class="src">slides 143–144</span></header>
         <p class="q">A 600 kg wrecking ball on a 37 m cable starts from rest with the cable 22° from vertical. It hits the building when the cable is vertical. What is its speed at impact?</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Height drop: \(h_1=L-L\cos22^\circ=37(1-0.927)=2.69\ \text{m}\).</li>
-          <li>\(mgh_1=\frac12mv_2^2\Rightarrow v_2=\sqrt{2(9.81)(2.69)}=7.27\ \text{m/s}\). The mass cancels.</li>
-        </ol><p class="ans"><b>Answer</b>7.27 m/s</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>The wrecking ball swings like a pendulum. The cable's tension does no work, so mechanical energy is conserved. Use geometry to find how far the ball drops.</p>
+<ol class="steps">
+<li><p class="st">Height drop from the cable angle</p><div class="fx"><span>Formula</span>\[ h=L-L\cos\theta=L(1-\cos\theta) \]</div><div class="mx">\[ h_1=37(1-\cos22^\circ)=37(1-0.927)=2.69\ \text{m} \]</div></li>
+<li><p class="st">Conservation of energy, release → bottom</p><div class="fx"><span>Formula</span>\[ mgh_1=\tfrac12mv_2^2\ \Rightarrow\ v_2=\sqrt{2gh_1} \]</div><div class="mx">\[ v_2=\sqrt{2(9.81)(2.69)}=7.27\ \text{m/s} \]</div><p>The mass cancels.</p></li>
+</ol><p class="ans"><b>Answer</b>7.27 m/s</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">E21</span><h4>Book dropped on a spring</h4><span class="src">slides 140–142</span></header>
         <p class="q">A spring has k = 1600 N/m. (a) How far must it be compressed to store 3.20 J? (b) Standing vertically, it has a 1.20 kg book dropped onto it from 0.80 m above its top. What is the maximum compression?</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>(a) \(\frac12kx^2=3.20\Rightarrow x=\sqrt{\dfrac{2(3.20)}{1600}}=0.0632\ \text{m}\).</li>
-          <li>(b) Put the reference at the lowest point, so the book falls \(0.80+x\) in total. It's at rest at both ends: <div class="mx">\[ mg(0.80+x)=\tfrac12kx^2\ \Rightarrow\ 11.77(0.80+x)=800x^2 \]</div></li>
-          <li>\(800x^2-11.77x-9.418=0\Rightarrow x=\dfrac{11.77+\sqrt{11.77^2+4(800)(9.418)}}{1600}=\dfrac{11.77+174.0}{1600}=0.116\ \text{m}\).</li>
-        </ol><p class="ans"><b>Answer</b>(a) 0.0632 m · (b) 0.116 m</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>(a) Energy stored in a spring is elastic PE. (b) Conservation of energy from release to maximum compression. The book is at rest at both moments, and it falls the 0.80 m gap <i>plus</i> the compression x.</p>
+<ol class="steps">
+<li><p class="st">(a) Compression for 3.20 J</p><div class="fx"><span>Formula</span>\[ U_E=\tfrac12kx^2\ \Rightarrow\ x=\sqrt{\frac{2U_E}{k}} \]</div><div class="mx">\[ x=\sqrt{\frac{2(3.20)}{1600}}=0.0632\ \text{m} \]</div></li>
+<li><p class="st">(b) Conservation, release → max compression</p><p>Put the reference at the lowest point, so the book starts \(0.80+x\) above it.</p><div class="fx"><span>Formula</span>\[ U_{G1}=U_{E2}:\quad mg(h+x)=\tfrac12kx^2 \]</div><div class="mx">\[ 11.77(0.80+x)=800x^2 \]</div></li>
+<li><p class="st">Solve the quadratic</p><div class="fx"><span>Formula</span>\[ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} \]</div><div class="mx">\[ 800x^2-11.77x-9.418=0\ \Rightarrow\ x=\frac{11.77+\sqrt{11.77^2+4(800)(9.418)}}{1600}=\frac{11.77+174.0}{1600}=0.116\ \text{m} \]</div><p>Keep the positive root.</p></li>
+</ol><p class="ans"><b>Answer</b>(a) 0.0632 m · (b) 0.116 m</p></div>
       </article>
     </div>
   </div>
@@ -1007,25 +1106,29 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\
         <header><span class="pid">E22</span><h4>Skier on rough snow</h4><span class="src">slides 136–139</span></header>
         <p class="q">A 45 kg skier goes down a 30° snowy slope (μₖ = 0.350) with an initial speed of 1.00 m/s, traveling 7.50 m. Find (a) the total work on her and (b) her final speed.</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Forces: weight (60° from the downhill displacement), normal (90°), friction (180°). \(mg=441.5\ \text{N}\).</li>
-          <li>\(W_W=mgd\cos60^\circ=441.5(7.50)(0.5)=1655.4\ \text{J}\). This is the same as \(mgd\sin30^\circ\).</li>
-          <li>\(W_N=0\). \(W_f=-\mu mg\cos30^\circ\,d=-0.350(441.5)(0.866)(7.50)=-1003.6\ \text{J}\).</li>
-          <li>(a) \(W_{tot}=1655.4-1003.6=651.8\ \text{J}\).</li>
-          <li>(b) Work–energy theorem: <div class="mx">\[ \tfrac12(45)v_2^2=\tfrac12(45)(1.00)^2+651.8=674.3\Rightarrow v_2=\sqrt{29.97}=5.47\ \text{m/s} \]</div></li>
-        </ol><p class="ans"><b>Answer</b>(a) ≈ 652 J · (b) 5.47 m/s</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Friction is present, so mechanical energy isn't conserved. Use the work–energy theorem instead: add up the work done by every force (weight, normal, friction), and that total equals the change in kinetic energy.</p>
+<ol class="steps">
+<li><p class="st">Work by the weight</p><p>Weight is 60° from the downhill displacement. \(mg=45(9.81)=441.5\ \text{N}\).</p><div class="fx"><span>Formula</span>\[ W=Fd\cos\theta \]</div><div class="mx">\[ W_W=441.5(7.50)\cos60^\circ=1655.4\ \text{J} \]</div></li>
+<li><p class="st">Work by the normal force</p><p>Perpendicular to the motion (90°), so \(W_N=0\).</p></li>
+<li><p class="st">Work by friction</p><div class="fx"><span>Formula</span>\[ f=\mu_kN=\mu_kmg\cos\theta,\qquad W_f=-fd \]</div><div class="mx">\[ W_f=-0.350(441.5)(0.866)(7.50)=-1003.6\ \text{J} \]</div></li>
+<li><p class="st">(a) Total work</p><div class="fx"><span>Formula</span>\[ W_{tot}=W_W+W_N+W_f \]</div><div class="mx">\[ W_{tot}=1655.4+0-1003.6=651.8\ \text{J} \]</div></li>
+<li><p class="st">(b) Final speed from the work–energy theorem</p><div class="fx"><span>Formula</span>\[ W_{tot}=K_2-K_1 \]</div><div class="mx">\[ \tfrac12(45)v_2^2=\tfrac12(45)(1.00)^2+651.8=674.3\ \Rightarrow\ v_2=\sqrt{29.97}=5.47\ \text{m/s} \]</div></li>
+</ol><p class="ans"><b>Answer</b>(a) ≈ 652 J · (b) 5.47 m/s</p></div>
       </article>
 
       <article class="prob">
         <header><span class="pid">E23</span><h4>Box down a rough incline</h4><span class="src">slides 145–147</span></header>
         <p class="q">A 2.0 kg box slides from rest 3.67 m down a 30° incline with μₖ = 0.100. Find (a) the total work and (b) its speed at the bottom.</p>
         <button class="reveal" type="button">Show solution</button>
-        <div class="sol"><ol class="steps">
-          <li>Reference at the bottom: \(h_1=d\sin30^\circ=1.835\ \text{m}\), so \(U_1=mgh_1=(2.0)(9.81)(1.835)=36.0\ \text{J}\).</li>
-          <li>\(W_{other}=-\mu mgd\cos30^\circ=-(0.100)(2.0)(9.81)(3.67)(0.866)=-6.24\ \text{J}\).</li>
-          <li>(a) \(W_{tot}=-(U_2-U_1)+W_{other}=36.0-6.24=29.8\ \text{J}\).</li>
-          <li>(b) \(W_{tot}=K_2-K_1=\frac12(2.0)v_2^2\Rightarrow v_2=\sqrt{29.77}=5.46\ \text{m/s}\).</li>
-        </ol><p class="ans"><b>Answer</b>(a) 29.8 J · (b) 5.46 m/s</p></div>
+        <div class="sol">
+<p class="concept"><b>Concept</b>Energy with friction: friction removes mechanical energy, so include its (negative) work as \(W_{other}\): \(K_1+U_1+W_{other}=K_2+U_2\). Gravity's work comes from the drop in height.</p>
+<ol class="steps">
+<li><p class="st">Starting height and gravitational PE</p><div class="fx"><span>Formula</span>\[ h=d\sin\theta,\qquad U=mgh \]</div><div class="mx">\[ h_1=3.67\sin30^\circ=1.835\ \text{m}\qquad U_1=(2.0)(9.81)(1.835)=36.0\ \text{J} \]</div></li>
+<li><p class="st">Work done by friction</p><div class="fx"><span>Formula</span>\[ W_{other}=-\mu_kmg\cos\theta\cdot d \]</div><div class="mx">\[ W_{other}=-(0.100)(2.0)(9.81)(0.866)(3.67)=-6.24\ \text{J} \]</div></li>
+<li><p class="st">(a) Total work</p><div class="fx"><span>Formula</span>\[ W_{tot}=-(U_2-U_1)+W_{other} \]</div><div class="mx">\[ W_{tot}=36.0-6.24=29.8\ \text{J} \]</div></li>
+<li><p class="st">(b) Speed from the work–energy theorem</p><div class="fx"><span>Formula</span>\[ W_{tot}=K_2-K_1 \]</div><div class="mx">\[ 29.8=\tfrac12(2.0)v_2^2-0\ \Rightarrow\ v_2=\sqrt{29.77}=5.46\ \text{m/s} \]</div></li>
+</ol><p class="ans"><b>Answer</b>(a) 29.8 J · (b) 5.46 m/s</p></div>
       </article>
     </div>
   </div>
